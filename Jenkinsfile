@@ -1,4 +1,4 @@
-//pipeline {
+pipeline {
     agent any
 
     environment {
@@ -8,7 +8,19 @@
     }
 
     stages {
-    
+        stage('Skip Auto-Commits') {
+            steps {
+            script {
+                def lastCommitMessage = sh(script: "git log -1 --pretty=%B", returnStdout: true).trim()
+                if (lastCommitMessage.contains("[skip ci]")) {
+                    echo "Auto-commit detected. Skipping build."
+                    currentBuild.result = 'SUCCESS'
+                    error("Stopping pipeline due to auto-commit.")
+                }
+            }
+        }
+    }
+
         stage('Cloning Git') {
             steps {
                 git(
