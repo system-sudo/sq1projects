@@ -8,9 +8,7 @@ pipeline {
     }
 
     stages {
-    when {
-                changeset "index.html"
-            }
+    
         stage('Cloning Git') {
             steps {
                 git(
@@ -61,7 +59,7 @@ pipeline {
                     git config user.email "systemtesting48@gmail.com"
                     git config user.name "system-sudo"
                     git add deploymentservice.yaml
-                    git commit -m "Update deployment image to version ${BUILD_NUMBER}" || echo "No changes to commit"
+                    git commit -m "[skip ci] Update deployment image to version ${BUILD_NUMBER}" || echo "No changes to commit"
                     git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main
                 """
             }
