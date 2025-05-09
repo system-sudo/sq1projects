@@ -48,8 +48,9 @@ pipeline {
 
             // Update the image tag in the YAML file
             sh """
-                sed -i 's|^\\s*image:.*${dockerImageName}:.*|        image: ${newTag}|' deploymentservice.yaml
+                sed -i 's|^\\s*image: .*|        image: ${newTag}|' deploymentservice.yaml
             """
+
 
             // Git commit and push the changes
             withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
