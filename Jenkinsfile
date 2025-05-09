@@ -53,7 +53,7 @@ pipeline {
 
 
             // Git commit and push the changes
-            withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
+            withCredentials([string(credentialsId: 'github_token', variable: 'GITHUB_TOKEN')]) {
                 sh """
                     git config user.email "systemtesting48@gmail.com"
                     git config user.name "system-sudo"
