@@ -37,15 +37,15 @@ pipeline {
             }
         }
         stage('Update Deployment YAML') {
-            steps {
-                script {
-                    def newTag = "${dockerImageName}:${BUILD_NUMBER}"
-                    sh """
-                        sed -i 's|image: ${dockerImageName}:.*|image: ${newTag}|' deploymentservice.yaml
-                    """
-                }
-            }
+    steps {
+        script {
+            def newTag = "${dockerImageName}:${BUILD_NUMBER}"
+            sh """
+                sed -i 's|^\\s*image:.*${dockerImageName}:.*|        image: ${newTag}|' deploymentservice.yaml
+            """
         }
+    }
+}
      
         stage('Deploy to Kubernetes') {
     steps {
