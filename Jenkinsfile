@@ -36,8 +36,8 @@ pipeline {
                 }
             }
         }
-
-        stage('Update Deployment File') {
+//remove from below
+        //stage('Update Deployment File') {
     environment {
         GIT_REPO_NAME = "sq1projects"
         GIT_USER_NAME = "system-sudo"
