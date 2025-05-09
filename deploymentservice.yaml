@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: sq1
-        image: systemtesting48/sq1:35
+        image: systemtesting48/sq1:36
         ports:
         - containerPort: 80
         
