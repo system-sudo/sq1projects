@@ -1,4 +1,4 @@
-//pipeline {
+pipeline {
     agent any
 
     environment {
@@ -8,21 +8,9 @@
     }
 
     stages {
-    stage('Run Pipeline Except for deploymentservice.yaml') {
-        when {
-            expression {
-                // Get list of changed files
-                def changes = sh(script: "git diff --name-only HEAD~1", returnStdout: true).trim().split("\n")
-                // Run the stage only if changes include files other than deploymentservice.yaml
-                return changes.any { it != 'deploymentservice.yaml' }
+    when {
+                changeset "index.html"
             }
-        }
-        steps {
-            echo "Changes detected outside deploymentservice.yaml. Proceeding with pipeline..."
-        }
-    }
-
-
         stage('Cloning Git') {
             steps {
                 git(
