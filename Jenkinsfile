@@ -38,28 +38,33 @@ pipeline {
         }
 
         stage('Update Deployment File') {
-        environment {
-            GIT_REPO_NAME = "sq1projects"
-            GIT_USER_NAME = "system-sudo"
-        }
-        steps {
-            script {
+    environment {
+        GIT_REPO_NAME = "sq1projects"
+        GIT_USER_NAME = "system-sudo"
+    }
+    steps {
+        script {
             def newTag = "${dockerImageName}:${BUILD_NUMBER}"
+
+            // Update the image tag in the YAML file
             sh """
                 sed -i 's|^\\s*image:.*${dockerImageName}:.*|        image: ${newTag}|' deploymentservice.yaml
             """
-        }
+
+            // Git commit and push the changes
             withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
-                sh '''
+                sh """
                     git config user.email "systemtesting48@gmail.com"
                     git config user.name "system-sudo"
                     git add deploymentservice.yaml
-                    git commit -m "Update deployment image to version ${BUILD_NUMBER}"
+                    git commit -m "Update deployment image to version ${BUILD_NUMBER}" || echo "No changes to commit"
                     git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main
-                '''
+                """
             }
         }
     }
+}
+
             
         stage('Deploy to Kubernetes') {
     steps {
