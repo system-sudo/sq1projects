@@ -1,107 +1,91 @@
-
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
     <title>DevOps PoC Presentation</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f4f4f4; }
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f4f4f4; text-align: center; }
         .slide { display: none; padding: 60px; height: 100vh; box-sizing: border-box; background: white; }
+        .slide img { max-width: 80%; height: auto; opacity: 0; transition: opacity 1s ease-in-out; }
         .slide.active { display: block; }
         .nav-buttons { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); }
-        button { padding: 10px 20px; margin: 0 10px; font-size: 16px; }
+        button { padding: 10px 20px; margin: 0 10px; font-size: 16px; cursor: pointer; }
     </style>
 </head>
 <body>
-<div class="slide active" id="slide0">
-<pre>DevOps Proof of Concept (POC)
-An Overview of the DevOps PoC Implementation</pre>
-</div>
-<div class="slide" id="slide1">
-<pre>Introduction to DevOps
-DevOps is a set of practices that combines software development (Dev) and IT operations (Ops). It aims to shorten the systems development life cycle and provide continuous delivery with high software quality.</pre>
-</div>
-<div class="slide" id="slide2">
-<pre>Objectives of the PoC
-1. Demonstrate the feasibility of implementing DevOps practices.
-2. Validate the integration of CI/CD pipelines.
-3. Assess the benefits of automated deployments.
-4. Identify potential challenges and areas for improvement.</pre>
-</div>
-<div class="slide" id="slide3">
-<pre>Tools and Technologies Used
-1. Jenkins - Continuous Integration
-2. Docker - Containerization
-3. Kubernetes - Container Orchestration
-4. Git - Version Control
-5. Argo CD - GitOps Continuous Delivery
-6. Helm - Kubernetes Package Management
-7. SonarQube - Code Quality Analysis</pre>
-</div>
-<div class="slide" id="slide4">
-<pre>Architecture Diagram
-Architecture Diagram Placeholder</pre>
-</div>
-<div class="slide" id="slide5">
-<pre>Implementation Steps
-1. Set up version control with Git.
-2. Configure Jenkins for CI/CD.
-3. Create Docker images for applications.
-4. Deploy applications to Kubernetes.
-5. Implement GitOps with Argo CD.
-6. Monitor and analyze code quality with SonarQube.</pre>
-</div>
-<div class="slide" id="slide6">
-<pre>CI/CD Pipeline Overview
-1. Code Commit - Developers commit code to Git repository.
-2. Continuous Integration - Jenkins builds and tests the code.
-3. Continuous Delivery - Jenkins deploys the code to Kubernetes.
-4. Continuous Deployment - Argo CD manages the deployment lifecycle.</pre>
-</div>
-<div class="slide" id="slide7">
-<pre>Benefits Achieved
-1. Faster and more reliable deployments.
-2. Improved collaboration between development and operations teams.
-3. Enhanced code quality and security.
-4. Greater scalability and flexibility.</pre>
-</div>
-<div class="slide" id="slide8">
-<pre>Challenges Faced
-1. Initial setup and configuration complexity.
-2. Integration of various tools and technologies.
-3. Ensuring security and compliance.
-4. Managing and monitoring the CI/CD pipeline.</pre>
-</div>
-<div class="slide" id="slide9">
-<pre>Conclusion and Next Steps
-The DevOps PoC demonstrated the feasibility and benefits of implementing DevOps practices. Next steps include scaling the implementation, continuous improvement, and addressing the challenges faced.</pre>
-</div>
 
-<div class="nav-buttons">
-    <button onclick="prevSlide()">Previous</button>
-    <button onclick="nextSlide()">Next</button>
-</div>
-<script>
-    let currentSlide = 0;
-    const totalSlides = 10;
-    function showSlide(index) {
-        for (let i = 0; i < totalSlides; i++) {
-            document.getElementById('slide' + i).classList.remove('active');
+    <div class="slide active" id="slide0">
+        <img src="slides/slide0.jpg" alt="DevOps PoC Overview">
+    </div>
+    <div class="slide" id="slide1">
+        <img src="slides/slide1.jpg" alt="Introduction to DevOps">
+    </div>
+    <div class="slide" id="slide2">
+        <img src="slides/slide2.jpg" alt="Objectives of the PoC">
+    </div>
+    <div class="slide" id="slide3">
+        <img src="slides/slide3.jpg" alt="Tools and Technologies Used">
+    </div>
+    <div class="slide" id="slide4">
+        <img src="slides/slide4.jpg" alt="Architecture Diagram">
+    </div>
+    <div class="slide" id="slide5">
+        <img src="slides/slide5.jpg" alt="Implementation Steps">
+    </div>
+    <div class="slide" id="slide6">
+        <img src="slides/slide6.jpg" alt="CI/CD Pipeline Overview">
+    </div>
+    <div class="slide" id="slide7">
+        <img src="slides/slide7.jpg" alt="Benefits Achieved">
+    </div>
+    <div class="slide" id="slide8">
+        <img src="slides/slide8.jpg" alt="Challenges Faced">
+    </div>
+    <div class="slide" id="slide9">
+        <img src="slides/slide9.jpg" alt="Conclusion and Next Steps">
+    </div>
+
+    <div class="nav-buttons">
+        <button onclick="prevSlide()">Previous</button>
+        <button onclick="nextSlide()">Next</button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const totalSlides = 10;
+
+        function showSlide(index) {
+            document.querySelectorAll('.slide').forEach((slide, i) => {
+                slide.classList.remove('active');
+                slide.querySelector('img').style.opacity = '0';
+                if (i === index) {
+                    slide.classList.add('active');
+                    setTimeout(() => slide.querySelector('img').style.opacity = '1', 100);
+                }
+            });
         }
-        document.getElementById('slide' + index).classList.add('active');
-    }
-    function nextSlide() {
-        if (currentSlide < totalSlides - 1) {
-            currentSlide++;
-            showSlide(currentSlide);
+
+        function nextSlide() {
+            if (currentSlide < totalSlides - 1) {
+                currentSlide++;
+                showSlide(currentSlide);
+            }
         }
-    }
-    function prevSlide() {
-        if (currentSlide > 0) {
-            currentSlide--;
-            showSlide(currentSlide);
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                currentSlide--;
+                showSlide(currentSlide);
+            }
         }
-    }
-</script>
+
+        // Keyboard navigation support
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'ArrowRight') nextSlide();
+            if (event.key === 'ArrowLeft') prevSlide();
+        });
+
+        showSlide(currentSlide); // Initialize the slideshow
+    </script>
 </body>
 </html>
