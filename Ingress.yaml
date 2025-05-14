@@ -1,27 +1,26 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: argo-sq1-ingress
+  name: app-ingress
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /$2
-    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
 spec:
   ingressClassName: nginx
   rules:
   - host: aabc40ac483aa4c87838e05fa2edbc01-1820942088.us-east-1.elb.amazonaws.com
     http:
       paths:
-      - path: /argocd(/|$)(.*)
-        pathType: Prefix
-        backend:
-          service:
-            name: example-argocd-server
-            port:
-              number: 443
       - path: /sq1(/|$)(.*)
-        pathType: Prefix
+        pathType: ImplementationSpecific
         backend:
           service:
             name: sq1-service
+            port:
+              number: 80
+      - path: /tic-tac-toe(/|$)(.*)
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: tic-tac-toe-service
             port:
               number: 80
