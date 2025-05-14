@@ -30,7 +30,7 @@ metadata:
 spec:
   selector:
     app: sq1 
-  type: LoadBalancer
+  type: ClusterIP
   ports:
   - protocol: TCP
     port: 80
