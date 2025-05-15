@@ -9,10 +9,13 @@ kubectl configured to access your cluster
 
 🧭 Step-by-Step Installation
 1. Add the NGINX Ingress Helm repository
+
 helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+
 helm repo update
 
 2. Install the Ingress Controller
+
 helm install ingress-nginx ingress-nginx/ingress-nginx \
   --namespace ingress-nginx \
   --create-namespace
