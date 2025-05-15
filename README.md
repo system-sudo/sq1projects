@@ -33,9 +33,11 @@ Look for a LoadBalancer service named ingress-nginx-controller. The EXTERNAL-IP 
 **how to install nginx ingress controller default method:**
 1. Ingress Controller
 install an Ingress controller like NGINX:
+
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.9.4/deploy/static/provider/aws/deploy.yaml
 
 2.Then confirm it’s running:
+
 kubectl get pods -n ingress-nginx
 
 3. Argo CD Setup
