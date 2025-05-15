@@ -47,4 +47,5 @@ kubectl get pods -n ingress-nginx
 You can install Argo CD in your Kops-managed cluster the same way:
 
 kubectl create namespace argocd
+
 kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
