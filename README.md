@@ -25,6 +25,7 @@ Create a namespace ingress-nginx
 Deploy the NGINX Ingress Controller with default settings
 
 3. Verify the Installation
+
 kubectl get all -n ingress-nginx
 
 Look for a LoadBalancer service named ingress-nginx-controller. The EXTERNAL-IP or HOSTNAME is what you'll use in your Ingress host field.
