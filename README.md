@@ -39,9 +39,15 @@ install an Ingress controller like NGINX:
 
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.9.4/deploy/static/provider/aws/deploy.yaml
 
-2.Then confirm it’s running:
+2. Then confirm it’s running:
 
 kubectl get pods -n ingress-nginx
+
+3. Check the service:
+
+kubectl get svc -n ingress-nginx
+
+You should see a service named ingress-nginx-controller, usually of type LoadBalancer or NodePort.
 
 1. Argo CD Setup
 You can install Argo CD in your Kops-managed cluster the same way:
