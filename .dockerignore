@@ -1,2 +1,4 @@
 Jenkinsfile
 deploymentservice.yaml
+README.md
+ingress.yaml
