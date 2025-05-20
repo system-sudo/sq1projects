@@ -1,0 +1,12 @@
+helm upgrade argocd argo/argo-cd -n argocd \
+  --set server.ingress.enabled=true \
+  --set server.ingress.ingressClassName=nginx \
+  --set server.ingress.hosts[0]=api-sq1-k8s-local-n98gg0-6354459d9c33abee.elb.us-east-1.amazonaws.com \
+  --set server.ingress.paths[0]=/argocd \
+  --set server.ingress.pathType=Prefix \
+  --set server.ingress.annotations."nginx\.ingress\.kubernetes\.io/rewrite-target"="/\$2" \
+  --set server.ingress.annotations."nginx\.ingress\.kubernetes\.io/use-regex"="true" \
+  --set server.ingress.annotations."nginx\.ingress\.kubernetes\.io/ssl-redirect"="true" \
+  --set server.ingress.annotations."nginx\.ingress\.kubernetes\.io/backend-protocol"="HTTPS" \
+  --set configs.params."server\.rootpath"="/argocd" \
+  --set configs.params."server\.insecure"=true
